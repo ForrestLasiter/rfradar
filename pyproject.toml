@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rfradar"
+dynamic = ["version"]
+description = "Passive, listen-only wireless awareness: who's around you, who's following you, and which hotspots are fakes"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Forrest Lasiter" }]
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+]
+
+[project.optional-dependencies]
+# Monitor-mode Wi-Fi capture (needs a monitor-capable adapter, e.g. an Alfa).
+wifi = ["scapy>=2.5"]
+# Bluetooth Low Energy scanning via BlueZ (built-in laptop Bluetooth works).
+ble = ["bleak>=0.22"]
+all = ["scapy>=2.5", "bleak>=0.22"]
+dev = ["pytest>=8.0", "scapy>=2.5", "httpx>=0.27"]
+
+[project.scripts]
+# `rfradar` on your PATH calls main() in rfradar/cli.py.
+rfradar = "rfradar.cli:main"
+
+[tool.setuptools]
+packages = ["rfradar", "rfradar.sources"]
+
+[tool.setuptools.dynamic]
+version = { attr = "rfradar.__version__" }
+
+[tool.setuptools.package-data]
+rfradar = ["web/*"]

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RF Radar</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="brand">
+    <svg aria-hidden="true" viewBox="0 0 32 32" width="28" height="28"><circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="8" fill="none" stroke="currentColor" stroke-width="2" opacity=".6"/><circle cx="16" cy="16" r="2.5" fill="currentColor"/><path d="M16 16 L28 9" stroke="currentColor" stroke-width="2"/></svg>
+    <h1>RF Radar</h1>
+  </div>
+  <p class="where" id="where">Location: working it out…</p>
+  <button type="button" id="pause" class="btn" aria-pressed="false">Pause live updates</button>
+</header>
+
+<main id="main">
+  <p class="listen-note">Listen-only. Nothing here transmits, and nothing leaves this laptop.</p>
+
+  <section aria-labelledby="alerts-h" class="panel">
+    <h2 id="alerts-h">Alerts <span class="count" id="alert-count"></span></h2>
+    <ul id="alerts" class="alerts"></ul>
+    <p id="no-alerts" class="empty" hidden>No alerts. Nothing suspicious around you right now.</p>
+  </section>
+
+  <section aria-labelledby="stats-h" class="stats">
+    <h2 id="stats-h" class="sr-only">Around you now</h2>
+    <dl>
+      <div><dt>Wi-Fi networks</dt><dd id="n-ap">0</dd></div>
+      <div><dt>Wi-Fi devices</dt><dd id="n-client">0</dd></div>
+      <div><dt>Bluetooth devices</dt><dd id="n-ble">0</dd></div>
+      <div><dt>Trackers</dt><dd id="n-tracker">0</dd></div>
+      <div><dt>Places learned</dt><dd id="n-places">0</dd></div>
+    </dl>
+  </section>
+
+  <section class="panel" aria-labelledby="devices-h">
+    <h2 id="devices-h">What's around</h2>
+    <div role="tablist" aria-label="Device types" class="tabs">
+      <button role="tab" id="tab-ble" aria-controls="panel" aria-selected="true" data-kind="ble">Bluetooth</button>
+      <button role="tab" id="tab-ap" aria-controls="panel" aria-selected="false" tabindex="-1" data-kind="ap">Wi-Fi networks</button>
+      <button role="tab" id="tab-client" aria-controls="panel" aria-selected="false" tabindex="-1" data-kind="client">Wi-Fi devices</button>
+      <button role="tab" id="tab-places" aria-controls="panel" aria-selected="false" tabindex="-1" data-kind="places">Places</button>
+    </div>
+    <div id="panel" role="tabpanel" aria-labelledby="tab-ble" tabindex="0" class="table-wrap"></div>
+  </section>
+
+  <section class="panel sources" aria-labelledby="src-h">
+    <h2 id="src-h">Sources</h2>
+    <ul id="sources"></ul>
+  </section>
+</main>
+
+<div id="announce" class="sr-only" aria-live="polite"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
